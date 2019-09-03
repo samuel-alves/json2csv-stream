@@ -30,7 +30,7 @@ switch (process.version.match(/v([0-9]+\.[0-9]+)\.[0-9]+/)[1]) {
 /**
  * MyStream constructor function.
  *
- * @param {Object} options Optional options including 'del', 'keys', 'quote, 'eol'
+ * @param {Object} options Optional options including 'del', 'keys', 'quote, ,'escape 'eol'
  */
 var MyStream = function(options) {
 
@@ -44,6 +44,7 @@ var MyStream = function(options) {
   this.del = options.del || ',';
   this.keys = options.keys;
   this.quote = options.quote || null;
+  this.escape = options.escape || null;
   this.eol = options.eol || os.EOL;
   this.showHeader = options.showHeader !== false;
 
@@ -151,6 +152,9 @@ MyStream.prototype.writeLine = function(line) {
   // iterate over all keys
   var iterator = function(item, callback) {
     var val = lineObject[item];
+    if(!!that.escape && typeof val == 'string' && !!val) {
+        val = val.replace(/"/gi, that.escape + '"');
+    }
     if(!!that.quote) {
       val = that.quote + val + that.quote;
     }

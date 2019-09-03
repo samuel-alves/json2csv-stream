@@ -89,6 +89,7 @@ The following options are supported
  - `del`: Delimiter for csv values. Default is `,`.
  - `keys`: Specify the keys you'd like to output. In the default setting all keys are exported.
  - `quote`: The character to use to quote fields that contain a delimiter. If you set to null then all quoting will be ignored.
+- `escape`: The character to used to escape quotes inside of a quoted field.
  - `eol`: End-of-line marker. Default is the one used by the operating system.
  - `showHeader`: If you don't want the header line in your csv set to `false`. Default is `true`.
 
