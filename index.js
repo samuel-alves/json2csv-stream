@@ -45,6 +45,7 @@ var MyStream = function(options) {
   this.keys = options.keys;
   this.quote = options.quote || null;
   this.escape = options.escape || null;
+  this.replaceNullWith = options.replaceNullWith || undefined;
   this.eol = options.eol || os.EOL;
   this.showHeader = options.showHeader !== false;
 
@@ -155,8 +156,13 @@ MyStream.prototype.writeLine = function(line) {
     if(!!that.escape && typeof val == 'string' && !!val) {
         val = val.replace(/"/gi, that.escape + '"');
     }
-    if(!!that.quote) {
+    if(!!that.quote && val != 'NULL' && !!val) {
       val = that.quote + val + that.quote;
+    } else if(!!that.quote && val == 'NULL') {
+      // val = '#N/A';
+    }
+    if(typeof that.replaceNullWith != 'undefined') {
+      val = this.replaceNullWith;
     }
     that._line.push(val);
     callback(null);
