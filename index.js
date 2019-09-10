@@ -158,10 +158,8 @@ MyStream.prototype.writeLine = function(line) {
     }
     if(!!that.quote && val != 'NULL' && !!val) {
       val = that.quote + val + that.quote;
-    } else if(!!that.quote && val == 'NULL') {
-      // val = '#N/A';
     }
-    if(typeof that.replaceNullWith != 'undefined') {
+    if(typeof that.replaceNullWith != 'undefined' && val == 'NULL') {
       val = this.replaceNullWith;
     }
     that._line.push(val);
