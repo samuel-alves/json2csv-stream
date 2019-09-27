@@ -160,7 +160,7 @@ MyStream.prototype.writeLine = function(line) {
       val = that.quote + val + that.quote;
     }
     if(typeof that.replaceNullWith != 'undefined' && (val == 'NULL' || (val || "").trim() === '')) {
-      val = this.replaceNullWith;
+      val = that.replaceNullWith;
     }
     that._line.push(val);
     callback(null);
